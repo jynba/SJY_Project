@@ -6650,3 +6650,5 @@ exports._export_sfc = _export_sfc;
 exports.createSSRApp = createSSRApp;
 exports.index = index;
 exports.o = o;
+exports.onMounted = onMounted;
+exports.ref = ref;

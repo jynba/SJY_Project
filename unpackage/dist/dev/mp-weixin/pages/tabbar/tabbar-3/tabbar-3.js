@@ -33,5 +33,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     e: $data.active ? 1 : ""
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-afdd7fb7"], ["__file", "C:/Users/Lenovo/Desktop/SJY-Project/SJY_Project/pages/tabbar/tabbar-3/tabbar-3.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-afdd7fb7"], ["__file", "D:/Projects/sjyProject/SJY_Project/pages/tabbar/tabbar-3/tabbar-3.vue"]]);
 wx.createPage(MiniProgramPage);

@@ -15,7 +15,7 @@
 <style>
 	.content {
 		text-align: center;
-		height: 400upx;
-		margin-top: 200upx;
+		height: 400rpx;
+		margin-top: 200rpx;
 	}
 </style>

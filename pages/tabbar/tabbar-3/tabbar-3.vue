@@ -67,9 +67,9 @@ export default {
 	}
 	.logo {
 		position: relative;
-		margin-top: -400upx;
-		width: 200upx;
-		height: 200upx;
+		margin-top: -400rpx;
+		width: 200rpx;
+		height: 200rpx;
 		// z-index: -1;
 		opacity: 0;
 		transition: opacity 0.3s;
@@ -81,7 +81,7 @@ export default {
 .tabbar-box-wrap {
 	position: absolute;
 	width: 100%;
-	padding: 50upx;
+	padding: 50rpx;
 	box-sizing: border-box;
 	bottom: 0;
 	left: 0;
@@ -90,20 +90,20 @@ export default {
 		display: flex;
 		width: 100%;
 		background: #fff;
-		border-radius: 20upx;
-		padding: 15upx 20upx;
+		border-radius: 20rpx;
+		padding: 15rpx 20rpx;
 		box-sizing: border-box;
 		z-index: 2;
 		box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.1);
 		&:after {
 			content: '';
 			position: absolute;
-			bottom: -16upx;
+			bottom: -16rpx;
 			left: 0;
 			right: 0;
 			margin: auto;
-			width: 50upx;
-			height: 50upx;
+			width: 50rpx;
+			height: 50rpx;
 			transform: rotate(45deg);
 			background: #fff;
 			z-index: 1;
@@ -118,14 +118,14 @@ export default {
 			width: 100%;
 			height: 100%;
 			background: #ffffff;
-			border-radius: 20upx;
+			border-radius: 20rpx;
 			z-index: 2;
 		}
 		.tabbar-box-item {
 			// position: relative;
 			width: 100%;
 			z-index: 3;
-			margin: 10upx;
+			margin: 10rpx;
 			color: $uni-color-subtitle;
 			text-align: center;
 			font-size: $uni-font-size-base;

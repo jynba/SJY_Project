@@ -1,1 +1,1 @@
-<view class="content"> 页面 - 1 </view>
+<view class=" data-v-02c5fac1"><view class="ditu data-v-02c5fac1"><map class="data-v-02c5fac1" style="width:100%;height:100%" latitude="{{a}}" longitude="{{b}}" scale="{{c}}" markers="{{d}}" bindmarkertap="{{e}}"></map></view></view>

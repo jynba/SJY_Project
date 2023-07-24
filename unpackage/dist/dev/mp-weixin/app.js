@@ -31,7 +31,7 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/Lenovo/Desktop/SJY-Project/SJY_Project/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Projects/sjyProject/SJY_Project/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   return {
