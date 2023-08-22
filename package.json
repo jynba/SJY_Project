@@ -77,7 +77,10 @@
     }
   },
   "dependencies": {
-    "vant": "^4.6.2",
+    "vant": "^4.6.3",
     "vue-jsonp": "^2.0.0"
+  },
+  "devDependencies": {
+    "unplugin-vue-components": "^0.25.1"
   }
 }

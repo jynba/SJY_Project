@@ -1,82 +1,125 @@
 <template>
-  <view class="">
-    <view class="ditu">
-      <map style="width:100%;height:100%;" :latitude="latitude" :longitude="longitude" :scale="scale"
-           :markers="marker" @markertap="toMap()">
-      </map>
-    </view>
-  </view>
+	<view class="">
+		<view class="ditu">
+			<map style="width:100%;height:100%;" :latitude="latitude" :longitude="longitude" :scale="scale"
+				:markers="marker" @markertap="toMap()">
+			</map>
+		</view>
+	</view>
 </template>
 
 <script setup>
-// import QQMapWX from "@/utils/qqmap-wx-jssdk.min.js";
-const { QQMapWX } = require('@/utils/qqmap-wx-jssdk.min.js');
-import { ref, onMounted } from 'vue';
+	// import QQMapWX from "@/utils/qqmap-wx-jssdk.min.js";
+	// const { QQMapWX } = require('@/utils/qqmap-wx-jssdk.min.js');
+	import {
+		ref,
+		onMounted
+	} from 'vue';
 
-const latitude = ref(39.542); //纬度
-const longitude = ref(116.2529); //经度
-const scale = ref(14); //地图缩放程度
-const marker = ref([
-  // Define your marker(s) here if needed
-]);
+	const latitude = ref(39.542); //纬度
+	const longitude = ref(116.2529); //经度
+	const scale = ref(14); //地图缩放程度
+	const marker = ref([
+		// Define your marker(s) here if needed
+	]);
 
-const getLocation = () => {
-  const _this = this;
-  uni.authorize({
-    scope: 'scope.userLocation',
-    success() {
-      let location = {
-        longitude: longitude.value,
-        latitude: latitude.value,
-        province: "",
-        city: "",
-        area: "",
-        street: "",
-        address: "",
-      };
-      uni.getLocation({
-        type: 'gcj02',
-        geocode: true,
-        success: function (res) {
-          uni.setStorageSync('latitude', latitude.value);
-          uni.setStorageSync('longitude', longitude.value);
-          location.longitude = res.longitude;
-          location.latitude = res.latitude;
-          const qqmapsdk = new QQMapWX({
-            key: 'MMYBZ-OMSCU-UGCV3-GOGGH-YPT73-KYFFW' //申请的key
-          });
-          qqmapsdk.reverseGeocoder({
-            location,
-            success: function (res) {
-              let info = res.result;
-              location.province = info.address_component.province;
-              location.city = info.address_component.city;
-              location.area = info.address_component.district;
-              location.street = info.address_component.street;
-              location.address = info.address;
-              console.log(location);
-            },
-          });
-        },
-        fail: function (err) {
-          uni.showToast({
-            title: '获取定位失败',
-            icon: 'none'
-          })
-        }
-      })
-    }
-  })
-};
+	const getLocation = () => {
+		console.log("正在获取当前位置...");
+		// 获取用户是否开启 授权获取当前的地理位置、速度的权限。
+		uni.getSetting({
+			success(res) {
+				console.log(res)
+				// 如果没有授权
+				if (!res.authSetting['scope.userLocation']) {
+					// 则拉起授权窗口
+					uni.authorize({
+						scope: 'scope.userLocation',
+						success() {
+							//点击允许后--就一直会进入成功授权的回调 就可以使用获取的方法了
+							uni.getLocation({
+								type: 'wgs84',
+								success: function(res) {
+									console.log(res)
+									latitude.value = res.latitude;
+									longitude.value = res.longitude;
+									uni.showToast({
+										title: '当前位置的经纬度：' + res.longitude + ',' +
+											res.latitude,
+										icon: 'success',
+										mask: true
+									})
+								},
+								fail(error) {
+									console.log('失败', error)
+								}
+							})
+						},
+						fail(error) {
+							//点击了拒绝授权后--就一直会进入失败回调函数--此时就可以在这里重新拉起授权窗口
+							console.log('拒绝授权', error)
 
-onMounted(() => {
-  getLocation(); //获取当前定位
-});
+							uni.showModal({
+								title: '提示',
+								content: '若点击不授权，将无法使用位置功能',
+								cancelText: '不授权',
+								cancelColor: '#999',
+								confirmText: '授权',
+								confirmColor: '#f94218',
+								success(res) {
+									console.log(res)
+									if (res.confirm) {
+										// 选择弹框内授权
+										uni.openSetting({
+											success(res) {
+												console.log(res.authSetting)
+											}
+										})
+									} else if (res.cancel) {
+										// 选择弹框内 不授权
+										console.log('用户点击不授权')
+									}
+								}
+							})
+						}
+					})
+				} else {
+					// 有权限则直接获取
+					uni.getLocation({
+						type: 'wgs84',
+						success: function(res) {
+							console.log(res)
+							latitude.value = res.latitude;
+							longitude.value = res.longitude;
+							uni.showToast({
+								title: '当前位置的经纬度：' + res.longitude + ',' + res.latitude,
+								icon: 'success',
+								mask: true
+							})
+						},
+						fail(error) {
+							uni.showToast({
+								title: '请勿频繁调用！',
+								icon: 'none',
+							})
+							console.log('失败', error)
+						}
+					})
+				}
+			},
+			fail(error) {
+				console.log(error, 'error')
+			}
+		})
+	}
+
+	onMounted(() => {
+		getLocation(); //获取当前定位
+	});
 </script>
 
 <style scoped>
-.ditu {
-  width: 100vw;
-  height: 565rpx;
-}
+	.ditu {
+		width: 100vw;
+		height: 565rpx;
+	}
 </style>
